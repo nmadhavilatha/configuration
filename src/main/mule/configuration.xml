@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e2f46d9c-7907-4d1f-9cc2-f4172575f1f2" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="353e8fbe-f9e9-4922-810e-122561462c7e" file="dev.yaml" />
+	<flow name="configurationFlow" doc:id="97bb741b-ace8-48dc-8788-debe21f4aee4" >
+		<http:listener doc:name="Listener" doc:id="188563fe-d7e4-4017-9f31-6425c72acb6c" config-ref="HTTP_Listener_config" path="/config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d97f9ddb-e4e2-45a1-b4f6-f6a395d15eb0" message="#[payload]"/>
+	</flow>
+</mule>
